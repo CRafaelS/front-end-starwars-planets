@@ -6,7 +6,7 @@ import Provider from './contex/Provider';
 function App() {
   return (
     <Provider>
-      <span>Projeto Star Wars - Trybexx !</span>
+      <span>Projeto Star Wars - Trybe!</span>
       <Table />
     </Provider>
   );
