@@ -5,6 +5,9 @@ import starWarsContex from './starWarContex';
 function Provider({ children }) {
   const [starWarsInformation, setStarWarsInformation] = useState([]);
   const [filters, setFilters] = useState({ filterByName: { name: '' } });
+  const [filterByNumeric, setFilterByNumeric] = useState({
+    filterByNumericValues: [],
+  });
 
   useEffect(() => {
     const fechStarWars = async () => {
@@ -15,8 +18,16 @@ function Provider({ children }) {
     fechStarWars();
   }, []);
 
+  const context = {
+    starWarsInformation,
+    filters,
+    setFilters,
+    filterByNumeric,
+    setFilterByNumeric,
+  };
+
   return (
-    <starWarsContex.Provider value={{ starWarsInformation, filters, setFilters } }>
+    <starWarsContex.Provider value={ context }>
       { children }
     </starWarsContex.Provider>
   );
