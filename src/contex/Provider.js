@@ -6,7 +6,7 @@ function Provider({ children }) {
   const [starWarsInformation, setStarWarsInformation] = useState([]);
   const [filters, setFilters] = useState({ filterByName: { name: '' } });
   const [filterByNumeric, setFilterByNumeric] = useState([{
-    column: 'population',
+    column: '',
     comparison: 'maior que',
     value: 0,
   }]);

@@ -45,6 +45,13 @@ function Filter() {
     'surface_water',
   ];
 
+  const filterOption = () => {
+    const newOptions = columnOptions
+      .filter((option) => filterByNumeric
+        .every((remove) => option !== remove.column));
+    return newOptions;
+  };
+
   return (
     <section>
       <input
@@ -62,7 +69,7 @@ function Filter() {
             name="column"
             onChange={ handleChange }
           >
-            { columnOptions.map((option) => (
+            { filterOption().map((option) => (
               <option key={ option }>{option}</option>
             ))}
           </select>
