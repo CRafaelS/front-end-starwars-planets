@@ -2,7 +2,12 @@ import React, { useState, useContext } from 'react';
 import starWarsContex from '../contex/starWarContex';
 
 function Filter() {
-  const { filterByNumeric, setFilterByNumeric } = useContext(starWarsContex);
+  const {
+    filterByNumeric,
+    setFilterByNumeric,
+    filters,
+    setFilters,
+  } = useContext(starWarsContex);
 
   const [numericFilter, setNumericFilter] = useState({
     column: 'population',
@@ -10,9 +15,9 @@ function Filter() {
     value: 0,
   });
 
-  // const [filterByNumeric, setFilterByNumeric] = useState({
-  //   filterByNumericValues: [],
-  // });
+  function handleFilter(event) {
+    setFilters({ filterByName: { name: event.target.value } });
+  }
 
   const handleChange = ({ target: { name, value } }) => {
     setNumericFilter({
@@ -34,6 +39,12 @@ function Filter() {
 
   return (
     <section>
+      <input
+        type="text"
+        data-testid="name-filter"
+        value={ filters.filterByName.name }
+        onChange={ handleFilter }
+      />
       <form>
         <label htmlFor="column">
           Coluna

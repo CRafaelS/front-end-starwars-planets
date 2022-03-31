@@ -6,13 +6,8 @@ function Table() {
     starWarsInformation,
     setStarWarsInformation,
     filters,
-    setFilters,
     filterByNumeric,
   } = useContext(starWarsContex);
-
-  function handleFilter(event) {
-    setFilters({ filterByName: { name: event.target.value } });
-  }
 
   // const filteredPlanets = starWarsInformation
   //   .filter((el) => el.name.toLowerCase()
@@ -42,12 +37,6 @@ function Table() {
 
   return (
     <div>
-      <input
-        type="text"
-        data-testid="name-filter"
-        value={ filters.filterByName.name }
-        onChange={ handleFilter }
-      />
       <table>
         <thead>
           <tr>
