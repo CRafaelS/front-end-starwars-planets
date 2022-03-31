@@ -37,6 +37,14 @@ function Filter() {
     );
   };
 
+  const columnOptions = [
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ];
+
   return (
     <section>
       <input
@@ -54,11 +62,9 @@ function Filter() {
             name="column"
             onChange={ handleChange }
           >
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
+            {columnOptions.map((option) => (
+              <option key={ option }>{option}</option>
+            ))}
           </select>
         </label>
         <label htmlFor="comparison">

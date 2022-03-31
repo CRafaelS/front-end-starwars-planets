@@ -9,10 +9,6 @@ function Table() {
     filterByNumeric,
   } = useContext(starWarsContex);
 
-  // const filteredPlanets = starWarsInformation
-  //   .filter((el) => el.name.toLowerCase()
-  //     .includes(filters.filterByName.name.toLowerCase()));
-
   useEffect(() => {
     const finalFilter = () => {
       filterByNumeric.forEach(({ column, comparison, value }) => {
