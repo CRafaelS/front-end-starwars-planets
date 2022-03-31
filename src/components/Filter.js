@@ -62,7 +62,7 @@ function Filter() {
             name="column"
             onChange={ handleChange }
           >
-            {columnOptions.map((option) => (
+            { columnOptions.map((option) => (
               <option key={ option }>{option}</option>
             ))}
           </select>
