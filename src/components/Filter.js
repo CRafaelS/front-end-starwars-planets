@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
-// import starWarsContex from '../contex/Provider';
+import React, { useState, useContext } from 'react';
+import starWarsContex from '../contex/starWarContex';
 
 function Filter() {
+  const { filterByNumeric, setFilterByNumeric } = useContext(starWarsContex);
+
   const [numericFilter, setNumericFilter] = useState({
     column: 'population',
     comparison: 'maior que',
     value: 0,
   });
 
-  const [filterByNumeric, setFilterByNumeric] = useState({
-    filterByNumericValues: [],
-  });
+  // const [filterByNumeric, setFilterByNumeric] = useState({
+  //   filterByNumericValues: [],
+  // });
 
   const handleChange = ({ target: { name, value } }) => {
     setNumericFilter({
@@ -22,12 +24,12 @@ function Filter() {
   const handleClick = (event) => {
     event.preventDefault();
 
-    setFilterByNumeric({
-      filterByNumericValues: [
-        ...filterByNumeric.filterByNumericValues,
+    setFilterByNumeric(
+      [
+        ...filterByNumeric,
         numericFilter,
       ],
-    });
+    );
   };
 
   return (

@@ -1,16 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import starWarsContex from '../contex/starWarContex';
 
 function Table() {
-  const { starWarsInformation, filters, setFilters } = useContext(starWarsContex);
+  const {
+    starWarsInformation,
+    setStarWarsInformation,
+    filters,
+    setFilters,
+    filterByNumeric,
+  } = useContext(starWarsContex);
 
   function handleFilter(event) {
     setFilters({ filterByName: { name: event.target.value } });
   }
 
-  const filteredPlanets = starWarsInformation
-    .filter((el) => el.name.toLowerCase()
-      .includes(filters.filterByName.name.toLowerCase()));
+  // const filteredPlanets = starWarsInformation
+  //   .filter((el) => el.name.toLowerCase()
+  //     .includes(filters.filterByName.name.toLowerCase()));
+
+  useEffect(() => {
+    const finalFilter = () => {
+      filterByNumeric.forEach(({ column, comparison, value }) => {
+        if (comparison === 'maior que') {
+          const filterPlanet = starWarsInformation
+            .filter((planet) => +planet[column] > +value);
+          setStarWarsInformation(filterPlanet);
+        }
+        if (comparison === 'menor que') {
+          const filterPlanet = starWarsInformation
+            .filter((planet) => +planet[column] < +value);
+          setStarWarsInformation(filterPlanet);
+        }
+        if (comparison === 'igual a') {
+          const filterPlanet = starWarsInformation
+            .filter((planet) => +planet[column] === +value);
+          setStarWarsInformation(filterPlanet);
+        }
+      });
+    }; finalFilter();
+  }, [filterByNumeric]);
+
   return (
     <div>
       <input
@@ -38,23 +67,25 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          {filteredPlanets.map((elemt) => (
-            <tr key={ elemt.name }>
-              <td>{elemt.name}</td>
-              <td>{elemt.rotation_period}</td>
-              <td>{elemt.orbital_period}</td>
-              <td>{elemt.diameter}</td>
-              <td>{elemt.climate}</td>
-              <td>{elemt.gravity}</td>
-              <td>{elemt.terrain}</td>
-              <td>{elemt.surface_water}</td>
-              <td>{elemt.population}</td>
-              <td>{elemt.films}</td>
-              <td>{elemt.created}</td>
-              <td>{elemt.edited}</td>
-              <td>{elemt.url}</td>
-            </tr>
-          ))}
+          {starWarsInformation.filter((el) => el.name.toLowerCase()
+            .includes(filters.filterByName.name.toLowerCase()))
+            .map((elemt) => (
+              <tr key={ elemt.name }>
+                <td>{elemt.name}</td>
+                <td>{elemt.rotation_period}</td>
+                <td>{elemt.orbital_period}</td>
+                <td>{elemt.diameter}</td>
+                <td>{elemt.climate}</td>
+                <td>{elemt.gravity}</td>
+                <td>{elemt.terrain}</td>
+                <td>{elemt.surface_water}</td>
+                <td>{elemt.population}</td>
+                <td>{elemt.films}</td>
+                <td>{elemt.created}</td>
+                <td>{elemt.edited}</td>
+                <td>{elemt.url}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
