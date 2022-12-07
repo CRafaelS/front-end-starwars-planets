@@ -52,6 +52,12 @@ function Filter() {
     return newOptions;
   };
 
+  const addOption = ({ target }) => {
+    const returnOption = filterByNumeric
+      .filter((addNewOpt) => addNewOpt.column !== target.value);
+    setFilterByNumeric(returnOption);
+  };
+
   return (
     <section>
       <input
@@ -101,6 +107,18 @@ function Filter() {
         >
           Filtrar
         </button>
+        {filterByNumeric && filterByNumeric.map(({ column, comparison, value }) => (
+          <div key={ column }>
+            <span>
+              {' '}
+              {
+                `${column} ${comparison} ${value} `
+              }
+            </span>
+            {column
+              && <button type="button" value={ column } onClick={ addOption }>X</button>}
+          </div>
+        ))}
       </form>
     </section>
   );

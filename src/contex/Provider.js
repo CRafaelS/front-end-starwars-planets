@@ -5,11 +5,7 @@ import starWarsContex from './starWarContex';
 function Provider({ children }) {
   const [starWarsInformation, setStarWarsInformation] = useState([]);
   const [filters, setFilters] = useState({ filterByName: { name: '' } });
-  const [filterByNumeric, setFilterByNumeric] = useState([{
-    column: '',
-    comparison: 'maior que',
-    value: 0,
-  }]);
+  const [filterByNumeric, setFilterByNumeric] = useState([]);
 
   useEffect(() => {
     const fechStarWars = async () => {
